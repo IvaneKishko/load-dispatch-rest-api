@@ -1,8 +1,8 @@
 const fs = require("fs");
-const path = require('path');
+const path = require("path");
 
 const express = require("express");
-const cors = require('cors');
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
@@ -15,10 +15,9 @@ const app = express();
 
 app.use(bodyParser.json());
 
-app.use('/uploads/images', express.static(path.join('uploads', 'images')));
+app.use("/uploads/images", express.static(path.join("uploads", "images")));
 
 app.use(cors());
-
 
 app.use(landingRoutes);
 app.use("/api/loads", loadRoutes);
@@ -48,7 +47,7 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.q13yfea.mongodb.net/${process.env.NAME}?retryWrites=true&w=majority`
   )
-  .then(() => app.listen(5000))
+  .then(() => app.listen(process.env.PORT || 5000))
   .catch((err) => {
     console.log(err);
   });
